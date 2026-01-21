@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Extension Icons</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    h1 { color: #333; }
+    .canvas-container {
+      display: flex;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .canvas-item {
+      text-align: center;
+    }
+    canvas {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #4a90d9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover { background: #357abd; }
+    .instructions {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .instructions ol { padding-left: 20px; }
+    .instructions li { margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <h1>Generate Extension Icons</h1>
+  <p>Click the button below to download PNG icons for the extension.</p>
+
+  <div class="canvas-container">
+    <div class="canvas-item">
+      <canvas id="icon16" width="16" height="16"></canvas>
+      <p>16x16</p>
+    </div>
+    <div class="canvas-item">
+      <canvas id="icon48" width="48" height="48"></canvas>
+      <p>48x48</p>
+    </div>
+    <div class="canvas-item">
+      <canvas id="icon128" width="128" height="128"></canvas>
+      <p>128x128</p>
+    </div>
+  </div>
+
+  <button onclick="downloadAll()">Download All Icons</button>
+
+  <div class="instructions">
+    <h3>Instructions:</h3>
+    <ol>
+      <li>Click "Download All Icons" to download the PNG files</li>
+      <li>Move the downloaded files to the <code>icons/</code> folder in your extension directory</li>
+      <li>Make sure the files are named: <code>icon16.png</code>, <code>icon48.png</code>, <code>icon128.png</code></li>
+      <li>Reload the extension in Chrome</li>
+    </ol>
+  </div>
+
+  <script>
+    const sizes = [16, 48, 128];
+
+    function drawIcon(canvas) {
+      const ctx = canvas.getContext('2d');
+      const size = canvas.width;
+      const padding = size * 0.1;
+      const radius = size * 0.15;
+
+      // Background
+      ctx.beginPath();
+      ctx.roundRect(0, 0, size, size, radius);
+      ctx.fillStyle = '#4a90d9';
+      ctx.fill();
+
+      // Globe icon
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = Math.max(1, size / 16);
+      ctx.lineCap = 'round';
+
+      const cx = size / 2;
+      const cy = size / 2;
+      const r = size * 0.32;
+
+      // Outer circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Horizontal line
+      ctx.beginPath();
+      ctx.moveTo(cx - r, cy);
+      ctx.lineTo(cx + r, cy);
+      ctx.stroke();
+
+      // Vertical ellipse
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, r * 0.5, r, 0, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Top curve
+      ctx.beginPath();
+      ctx.ellipse(cx, cy - r * 0.3, r * 0.85, r * 0.3, 0, 0, Math.PI);
+      ctx.stroke();
+
+      // Bottom curve
+      ctx.beginPath();
+      ctx.ellipse(cx, cy + r * 0.3, r * 0.85, r * 0.3, 0, Math.PI, 0);
+      ctx.stroke();
+    }
+
+    // Draw all icons
+    sizes.forEach(size => {
+      const canvas = document.getElementById('icon' + size);
+      drawIcon(canvas);
+    });
+
+    function downloadAll() {
+      sizes.forEach(size => {
+        const canvas = document.getElementById('icon' + size);
+        const link = document.createElement('a');
+        link.download = `icon${size}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+  </script>
+</body>
+</html>

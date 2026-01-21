@@ -1,0 +1,55 @@
+/* LLM Translator - Content Script Styles */
+
+#local-translator-button {
+  position: absolute;
+  z-index: 2147483647;
+  background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  user-select: none;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+}
+
+#local-translator-button:hover {
+  background: linear-gradient(135deg, #357abd 0%, #2868a8 100%);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+#local-translator-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Translated text - no special styling, inherit from parent */
+.local-translator-translated {
+  /* Keep span transparent to preserve original styling */
+}
+
+/* Translating state (in progress) */
+.local-translator-translating {
+  background-color: rgba(255, 193, 7, 0.12);
+  border-bottom: 1px dashed #ffc107;
+  padding: 0 2px;
+  border-radius: 2px;
+  animation: pulse-translating 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-translating {
+  0%, 100% {
+    background-color: rgba(255, 193, 7, 0.08);
+  }
+  50% {
+    background-color: rgba(255, 193, 7, 0.2);
+  }
+}
+
