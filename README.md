@@ -1,6 +1,3 @@
-![capture2](capture2.gif)
-![capture](capture.gif)
-
 # LLM Translator
 
 [English](#english) | [中文](#中文)
