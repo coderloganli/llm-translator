@@ -1,8 +1,7 @@
+<a id="llm-translator"></a>
 # LLM Translator
 
-[English](#english) | [中文](#中文)
-
-## English
+[English](#llm-translator) | [中文](#llm-zh)
 
 Turn any webpage into your preferred language in a click. This Chrome extension translates highlighted text or whole pages using either a **local Ollama model** or **OpenAI ChatGPT**.
 
@@ -50,7 +49,10 @@ If you need a translator, I strongly suggest you download Claude Code and write 
 - Click a translated span to toggle **Translate/Revert** for that text.
 - Use **Translate Page** or **Revert All** from the popup for page-level actions.
 
-## 中文
+<a id="llm-zh"></a>
+## LLM翻译插件
+
+[English](#llm-translator) | [中文](#llm-zh)
 
 一键将网页翻译成你想要的语言。本 Chrome 扩展可翻译选中的文本或整页内容，支持 **本地 Ollama 模型** 或 **OpenAI ChatGPT**。
 
