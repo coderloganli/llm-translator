@@ -55,7 +55,7 @@ function hideButton() {
 }
 
 // Handle text selection
-document.addEventListener('mouseup', (e) => {
+document.addEventListener('mouseup', async (e) => {
   // Don't trigger if clicking on the button itself
   if (e.target.id === 'local-translator-button') {
     return;
@@ -64,6 +64,12 @@ document.addEventListener('mouseup', (e) => {
   // Don't trigger text selection logic when clicking on translated/translating spans
   if (e.target?.classList?.contains('local-translator-translated') ||
       e.target?.classList?.contains('local-translator-translating')) {
+    return;
+  }
+
+  // Check if selection translate is enabled
+  const { selectionTranslateEnabled = true } = await chrome.storage.sync.get('selectionTranslateEnabled');
+  if (!selectionTranslateEnabled) {
     return;
   }
 

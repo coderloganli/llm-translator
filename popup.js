@@ -5,7 +5,8 @@ const defaults = {
   modelName: 'llama3.2',
   ollamaUrl: 'http://localhost:11434',
   openaiApiKey: '',
-  openaiModel: 'gpt-4o-mini'
+  openaiModel: 'gpt-4o-mini',
+  selectionTranslateEnabled: true
 };
 
 // Load saved settings on popup open
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('ollamaUrl').value = settings.ollamaUrl;
   document.getElementById('openaiApiKey').value = settings.openaiApiKey;
   document.getElementById('openaiModel').value = settings.openaiModel;
+  document.getElementById('selectionTranslate').checked = settings.selectionTranslateEnabled;
 
   // Show/hide provider-specific settings
   updateProviderUI(settings.provider);
@@ -26,6 +28,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Handle provider change
 document.getElementById('provider').addEventListener('change', (e) => {
   updateProviderUI(e.target.value);
+});
+
+// Handle selection translate toggle
+document.getElementById('selectionTranslate').addEventListener('change', async (e) => {
+  await chrome.storage.sync.set({ selectionTranslateEnabled: e.target.checked });
 });
 
 // Show/hide settings based on provider
